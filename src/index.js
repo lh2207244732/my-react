@@ -9,6 +9,7 @@ const elem = (
         </ul>
     </div>
 )
+console.log(elem)
 
 function App(props){
     return(
@@ -24,23 +25,32 @@ class App extends Component{
     constructor(props){
         super(props)
         this.state={
-            num:0
+            num:0,
+            score:100
         }
+    }
+    componentDidMount(){
+        console.log('componentDidMount...')
+    }
+    componentDidUpdate(){
+        console.log('update...')
     }
     handleAdd(){
         this.setstate({
             num:this.state.num+1
         })
+        this.setstate({
+            score:this.state.score+1
+        })
     }
     render(){
         return (
             <div className='App' style={{ color: 'red' }}>
-                <ul className='List'>
-                    <li className='Item' onClick={this.handleAdd.bind(this)}>
-                        {this.state.num}
-                    </li>
-                 </ul>
-            </div>
+                <p>
+                    {this.state.num}--{this.state.score}
+                </p>
+                <button  onClick={this.handleAdd.bind(this)}>点击</button>
+            </div> 
         )
     }
 }

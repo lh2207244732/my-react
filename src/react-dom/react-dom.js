@@ -7,7 +7,6 @@
 
 import { Component } from "../react/react"
 
-
 function createDom(vdom) {
     //如果没有传，则直接返回
     if (vdom == undefined) return
@@ -46,7 +45,7 @@ function createDom(vdom) {
     }
 }
 
-function setProperty(dom, props) {
+export function setProperty(dom, props) {
     for (var key in props) {
         if (key == 'style' && typeof props[key] == 'object') {
             let attrs = ''
@@ -90,11 +89,16 @@ function createComponentIstance(comp,props){
 }
 function createComponentNode(instance){
 
-    // 获取虚拟DOM
-    instance.dom=instance.render()
-
+    // 获取虚拟DOM,并挂在组件实例上
+    instance.vdom=instance.render()
+        //如果组件实例上还没有挂载虚拟DOM，说明是创建阶段
+    if(!instance.vdom){
+        //添加生命周期函数,只在创建阶段执行
+        console.log('component...')
+        typeof instance.componentDidMount=='function'&&instance.componentDidMount()
+    }
     //转换为真实DOM
-    instance.dom=createDom(instance.dom)
+    instance.dom=createDom(instance.vdom)
 }
 
 function render(vdom, container) {
