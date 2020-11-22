@@ -21,36 +21,36 @@ function App(props){
     )
 }
 */
-class App extends Component{
-    constructor(props){
+class App extends Component {
+    constructor(props) {
         super(props)
-        this.state={
-            num:0,
-            score:100
+        this.state = {
+            num: 0,
+            score: 100
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         console.log('componentDidMount...')
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log('update...')
     }
-    handleAdd(){
+    handleAdd() {
         this.setstate({
-            num:this.state.num+1
+            num: this.state.num + 1
         })
         this.setstate({
-            score:this.state.score+1
+            score: this.state.score + 1
         })
     }
-    render(){
+    render() {
         return (
             <div className='App' style={{ color: 'red' }}>
                 <p>
                     {this.state.num}--{this.state.score}
                 </p>
-                <button  onClick={this.handleAdd.bind(this)}>点击</button>
-            </div> 
+                <button onClick={this.handleAdd.bind(this)}>点击</button>
+            </div>
         )
     }
 }
